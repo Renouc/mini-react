@@ -1,11 +1,11 @@
 {
   "type": "module",
-  "name": "mini-react-new",
+  "name": "mini-react",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:dev": "rollup -c ./scripts/rollup/dev.config.js --bundleConfigAsCjs",
+    "build:dev": "rimraf dist && rollup --bundleConfigAsCjs --config ./scripts/rollup/react.config.js",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "prepare": "husky"
@@ -16,13 +16,16 @@
   "devDependencies": {
     "@commitlint/cli": "^19.4.0",
     "@commitlint/config-conventional": "^19.2.2",
+    "@rollup/plugin-commonjs": "^28.0.1",
     "eslint": "^9.9.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.9.0",
     "husky": "^9.1.5",
     "prettier": "3.3.3",
+    "rimraf": "^6.0.1",
     "rollup": "^4.21.0",
+    "rollup-plugin-generate-package-json": "^3.2.0",
     "rollup-plugin-typescript2": "^0.36.0",
     "tslib": "^2.7.0",
     "typescript": "^5.5.4",
