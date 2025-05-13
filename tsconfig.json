@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", //编译目标版本, 保持最新语法，由 Rollup + Babel 处理兼容性
+    "strict": true, //严格类型检查 确保代码类型安全，避免运行时错误。
+    "esModuleInterop": true, //模块兼容性 允许混合使用 ESM 和 CommonJS 模块（Rollup 需要此配置处理依赖）
+    "skipLibCheck": true, // 跳过库类型检查（提升速度）
+    "moduleResolution": "node", // 模块解析策略
+    "sourceMap": true // 生成 Sourcemap（与 Rollup 的 sourcemap 配合）
+  },
+  "include": [
+    "packages/*"
+  ], //需要编译的目录
+  "exclude": [], // 需要排除的目录
+}
