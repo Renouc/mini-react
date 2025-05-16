@@ -21,3 +21,16 @@ pnpm add typescript -w -D
 ```bash
 pnpm tsc --init
 ```
+
+### Jest
+```bash
+pnpm add -w -D jest @types/jest @testing-library/jest-dom ts-jest jest-environment-jsdom
+```
+
+### Rollup
+
+```bash
+pnpm add -D rollup @rollup/plugin-babel @babel/core @babel/preset-env @rollup/plugin-typescript
+```
+
+

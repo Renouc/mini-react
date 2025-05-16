@@ -8,7 +8,8 @@
     "sourceMap": true // 生成 Sourcemap（与 Rollup 的 sourcemap 配合）
   },
   "include": [
-    "packages/*"
-, "packages/test/index.test.ts", "packages/test/index.ts"  ], //需要编译的目录
+    "packages/**/*.ts",
+    "packages/**/*.tsx"
+  ], //需要编译的目录
   "exclude": [], // 需要排除的目录
 }
