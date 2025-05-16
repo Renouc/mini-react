@@ -9,6 +9,6 @@
   },
   "include": [
     "packages/*"
-  ], //需要编译的目录
+, "packages/test/index.test.ts", "packages/test/index.ts"  ], //需要编译的目录
   "exclude": [], // 需要排除的目录
 }
