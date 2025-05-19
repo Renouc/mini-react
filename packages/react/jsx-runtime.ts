@@ -1,9 +1,8 @@
+import { REACT_ELEMENT_TYPE } from "shared/ReactSymbols";
+
 function ReactElement(type: any, props: any, key: any, ref: any) {
   return {
-    $$typeof:
-      typeof Symbol === "function" && Symbol.for
-        ? Symbol.for("react.element")
-        : 0xeac7,
+    $$typeof: REACT_ELEMENT_TYPE,
     type,
     props,
     key,
@@ -36,6 +35,5 @@ export function jsx(type: any, config: any, maybeKey?: any) {
 
   return ReactElement(type, props, key, ref);
 }
-
 
 export const jsxDEV = jsx;

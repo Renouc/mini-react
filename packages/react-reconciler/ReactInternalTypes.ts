@@ -1,0 +1,42 @@
+export type WorkTag = typeof HostRoot | typeof HostComponent | typeof HostText;
+export const HostRoot = 3;
+export const HostComponent = 5;
+export const HostText = 6;
+
+export type Fiber = {
+  // Fiber 节点类型
+  tag: WorkTag;
+
+  // 唯一标识符，用于优化渲染
+  key: string | null;
+
+  // React 元素类型 函数、类、DOM
+  elementType: any;
+
+  // 表示React元素的类型
+  // 对于函数组件，是函数本身
+  // 对于类组件，是类本身
+  // 对于DOM元素，是DOM节点类型
+  type: any;
+
+  // 存储与此Fiber关联的实际实例
+  // 对于DOM元素，是DOM节点
+  // 对于类组件，是类组件的实例
+  // 对于HostRoot，是FiberRoot对象
+  stateNode: any;
+
+  // 指向父Fiber节点，构成树的向上链接。
+  return: Fiber | null;
+
+  // 指向第一个子Fiber节点，是子树的入口点。
+  child: Fiber | null;
+
+  // 指向同级的下一个Fiber节点，构成同级节点的链表。
+  sibling: Fiber | null;
+
+  // 存储React元素的ref引用，连接到DOM节点或组件实例
+  ref: any;
+
+  // 存储React元素的props
+  pendingProps: any;
+};
