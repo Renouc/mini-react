@@ -30,9 +30,13 @@ function reconcileSingleElement(returnFiber: Fiber, children: any) {
   return created;
 }
 
-export function reconcileChildFibers(fiber: Fiber, children: any) {
+export function reconcileChildFibers(
+  fiber: Fiber,
+  children: any
+): Fiber | null {
+  
   // 单一子节点
-  if (children.$$typeof === REACT_ELEMENT_TYPE) {
+  if (children?.$$typeof === REACT_ELEMENT_TYPE) {
     return reconcileSingleElement(fiber, children);
   }
   // 多个子节点
