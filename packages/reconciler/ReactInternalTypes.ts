@@ -9,6 +9,10 @@ export const HostComponent = 5;
 // 文本节点
 export const HostText = 6;
 
+export type FiberRoot = {
+  containerInfo: HTMLElement;
+};
+
 export type Fiber = {
   // Fiber 节点类型
   tag: WorkTag;
