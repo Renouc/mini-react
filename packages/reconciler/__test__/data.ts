@@ -42,7 +42,7 @@ export const MULTIPLE_ELEMENTS = {
         props: {
           id: "title2",
           children: [
-            "du1 react ",
+            "renouc",
             {
               $$typeof: REACT_ELEMENT_TYPE,
               type: "span",
@@ -53,6 +53,37 @@ export const MULTIPLE_ELEMENTS = {
               ref: null,
             },
           ],
+        },
+        ref: null,
+      },
+    ],
+  },
+  ref: null,
+};
+
+// 函数组件测试数据
+export const FUNCTION_ELEMENT = {
+  $$typeof: REACT_ELEMENT_TYPE,
+  type: "div",
+  key: null,
+  props: {
+    id: "container",
+    children: [
+      {
+        $$typeof: REACT_ELEMENT_TYPE,
+        type: (props: any) => ({
+          $$typeof: REACT_ELEMENT_TYPE,
+          type: "p",
+          key: null,
+          props: {
+            children: "Hello" + props.name,
+          },
+          ref: null,
+        }),
+        key: null,
+        props: {
+          name: "Renou",
+          id: "xxx",
         },
         ref: null,
       },

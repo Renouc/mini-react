@@ -1,12 +1,28 @@
 import { reconcileChildFibers } from "./ChildFiber";
-import type { Fiber } from "./ReactInternalTypes";
+import {
+  FunctionComponent,
+  HostComponent,
+  HostText,
+  type Fiber,
+} from "./ReactInternalTypes";
 
 export function beginWork(fiber: Fiber) {
   // 纯文本节点
   if (typeof fiber.pendingProps.children === "string") {
     return null;
   }
-  // 1. 创建子节点
-  fiber.child = reconcileChildFibers(fiber, fiber.pendingProps.children);
-  return fiber.child;
+
+  switch (fiber.tag) {
+    case HostText:
+      return null;
+    case FunctionComponent:
+      const children = fiber.type(fiber.pendingProps);
+      fiber.child = reconcileChildFibers(fiber, children);
+      return fiber.child;
+    case HostComponent:
+      fiber.child = reconcileChildFibers(fiber, fiber.pendingProps.children);
+      return fiber.child;
+    default:
+      return null;
+  }
 }

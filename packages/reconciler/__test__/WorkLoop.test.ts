@@ -35,7 +35,7 @@ describe("workLoop测试", () => {
       container_fiber.child?.sibling?.child?.stateNode?.tagName
     ).toBeUndefined();
     expect(container_fiber.child?.sibling?.child?.stateNode?.textContent).toBe(
-      "du1 react "
+      "renouc"
     );
     // 测试p节点中的第二个子节点
     expect(container_fiber.child?.sibling?.child?.sibling).not.toBeNull();

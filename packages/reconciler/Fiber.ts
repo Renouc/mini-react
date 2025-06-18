@@ -1,5 +1,12 @@
 import { ReactElement } from "shared/ReactElementType";
-import { Fiber, HostComponent, HostRoot, HostText, WorkTag } from "./ReactInternalTypes";
+import {
+  Fiber,
+  FunctionComponent,
+  HostComponent,
+  HostRoot,
+  HostText,
+  WorkTag,
+} from "./ReactInternalTypes";
 
 export function createFiber(tag: WorkTag, key: string | null): Fiber {
   const fiber: Fiber = {
@@ -22,7 +29,8 @@ export function createFiberFromTypeAndProps(
   pendingProps: any,
   key: string | null
 ): Fiber {
-  let fiberTag: WorkTag = HostComponent;
+  let fiberTag: WorkTag =
+    typeof type === "function" ? FunctionComponent : HostComponent;
   const fiber = createFiber(fiberTag, key);
   fiber.elementType = type;
   fiber.type = type;
@@ -42,7 +50,6 @@ export function createFiberFromText(text: string): Fiber {
   fiber.pendingProps = text;
   return fiber;
 }
-
 
 // 创建HostRootFiber的方法
 export function createHostRootFiber(): Fiber {

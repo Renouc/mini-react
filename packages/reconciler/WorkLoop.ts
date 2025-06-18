@@ -30,7 +30,6 @@ function performUnitOfWork(fiber: Fiber) {
   let next: Fiber | null = beginWork(fiber);
 
   if (next) {
-    console.log("~~~next~~~", next);
     workInProgress = next;
   } else {
     // 回溯
@@ -40,8 +39,6 @@ function performUnitOfWork(fiber: Fiber) {
 
 // 循环遍历
 export function workLoop(container_fiber: Fiber) {
-  console.log("~~~work~~~");
-
   workInProgress = container_fiber;
   while (workInProgress) {
     performUnitOfWork(workInProgress);
