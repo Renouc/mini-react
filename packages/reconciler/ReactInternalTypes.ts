@@ -1,4 +1,4 @@
-export type WorkTag = typeof HostRoot | typeof HostComponent | typeof HostText;
+export type WorkTag = typeof HostRoot | typeof HostComponent | typeof HostText | typeof FunctionComponent;
 
 // 根Fiber 可以理解为根元素 ， 通过reactDom.render()产生的根元素
 export const HostRoot = 3;
@@ -8,6 +8,9 @@ export const HostComponent = 5;
 
 // 文本节点
 export const HostText = 6;
+
+// 函数组件
+export const FunctionComponent = 0;
 
 export type FiberRoot = {
   containerInfo: HTMLElement;
