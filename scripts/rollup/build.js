@@ -13,8 +13,14 @@ const packages = [
         file: "./dist/react/index.js",
         format: "umd",
         name: "react",
+        sourcemap: true,
       },
     ],
+    packageJson: {
+      name: "react",
+      version: "1.0.0",
+      main: "index.js",
+    },
   },
   {
     name: "jsx-runtime",
@@ -24,13 +30,32 @@ const packages = [
         file: "./dist/react/jsx-runtime.js",
         format: "umd",
         name: "jsx-runtime",
+        sourcemap: true,
       },
       {
         file: "./dist/react/jsx-dev-runtime.js",
         format: "umd",
         name: "jsx-dev-runtime",
+        sourcemap: true,
       },
     ],
+  },
+  {
+    name: "react-dom",
+    input: "./packages/react-dom/client.ts",
+    output: [
+      {
+        file: "./dist/react-dom/client.js",
+        format: "umd",
+        name: "react-dom",
+        sourcemap: true,
+      },
+    ],
+    packageJson: {
+      name: "react-dom",
+      version: "1.0.0",
+      main: "client.js",
+    },
   },
 ];
 
@@ -41,10 +66,13 @@ async function build() {
       plugins: [
         babel({
           presets: ["@babel/preset-env"],
+          babelHelpers: "bundled",
+          exclude: "node_modules/**",
         }),
         typescript({
           tsconfig: "./tsconfig.json",
           exclude: ["**/*.test.ts"],
+          sourceMap: true,
         }),
       ],
     };
@@ -53,20 +81,18 @@ async function build() {
     for (const output of pkg.output) {
       await bundle.write(output);
     }
+
+    if (pkg.packageJson) {
+      const reactDir = path.join("dist", pkg.packageJson.name);
+      if (!fs.existsSync(reactDir)) {
+        fs.mkdirSync(reactDir, { recursive: true });
+      }
+      fs.writeFileSync(
+        path.join(reactDir, "package.json"),
+        JSON.stringify(pkg.packageJson, null, 2)
+      );
+    }
   }
-  const packageJson = {
-    name: "react",
-    version: "1.0.0",
-    main: "index.js",
-  };
-  const reactDir = path.join("dist", "react");
-  if (!fs.existsSync(reactDir)) {
-    fs.mkdirSync(reactDir, { recursive: true });
-  }
-  fs.writeFileSync(
-    path.join(reactDir, "package.json"),
-    JSON.stringify(packageJson, null, 2)
-  );
 }
 
 build();
