@@ -1,28 +1,29 @@
-import { reconcileChildFibers } from "./ChildFiber";
+import { reconcileChildFibers } from './ChildFiber'
+import { renderWithHooks } from './FiberHook'
 import {
   FunctionComponent,
   HostComponent,
   HostText,
   type Fiber,
-} from "./ReactInternalTypes";
+} from './ReactInternalTypes'
 
 export function beginWork(fiber: Fiber) {
   // 纯文本节点
-  if (typeof fiber.pendingProps.children === "string") {
-    return null;
+  if (typeof fiber.pendingProps.children === 'string') {
+    return null
   }
 
   switch (fiber.tag) {
     case HostText:
-      return null;
+      return null
     case FunctionComponent:
-      const children = fiber.type(fiber.pendingProps);
-      fiber.child = reconcileChildFibers(fiber, children);
-      return fiber.child;
+      const children = renderWithHooks(fiber, fiber.type)
+      fiber.child = reconcileChildFibers(fiber, children)
+      return fiber.child
     case HostComponent:
-      fiber.child = reconcileChildFibers(fiber, fiber.pendingProps.children);
-      return fiber.child;
+      fiber.child = reconcileChildFibers(fiber, fiber.pendingProps.children)
+      return fiber.child
     default:
-      return null;
+      return null
   }
 }

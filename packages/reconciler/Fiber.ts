@@ -1,4 +1,4 @@
-import { ReactElement } from "shared/ReactElementType";
+import { ReactElement } from 'shared/ReactElementType'
 import {
   Fiber,
   FunctionComponent,
@@ -6,7 +6,7 @@ import {
   HostRoot,
   HostText,
   WorkTag,
-} from "./ReactInternalTypes";
+} from './ReactInternalTypes'
 
 export function createFiber(tag: WorkTag, key: string | null): Fiber {
   const fiber: Fiber = {
@@ -20,8 +20,9 @@ export function createFiber(tag: WorkTag, key: string | null): Fiber {
     sibling: null,
     ref: null,
     pendingProps: null,
-  };
-  return fiber;
+    memoizedState: null,
+  }
+  return fiber
 }
 
 export function createFiberFromTypeAndProps(
@@ -30,29 +31,29 @@ export function createFiberFromTypeAndProps(
   key: string | null
 ): Fiber {
   let fiberTag: WorkTag =
-    typeof type === "function" ? FunctionComponent : HostComponent;
-  const fiber = createFiber(fiberTag, key);
-  fiber.elementType = type;
-  fiber.type = type;
-  fiber.pendingProps = pendingProps;
-  return fiber;
+    typeof type === 'function' ? FunctionComponent : HostComponent
+  const fiber = createFiber(fiberTag, key)
+  fiber.elementType = type
+  fiber.type = type
+  fiber.pendingProps = pendingProps
+  return fiber
 }
 
 export function createFiberFromElement(element: ReactElement) {
-  const { type, props, key } = element;
-  const fiber = createFiberFromTypeAndProps(type, props, key);
-  return fiber;
+  const { type, props, key } = element
+  const fiber = createFiberFromTypeAndProps(type, props, key)
+  return fiber
 }
 
 // 创建纯文本fiber
 export function createFiberFromText(text: string): Fiber {
-  const fiber = createFiber(HostText, null);
-  fiber.pendingProps = text;
-  return fiber;
+  const fiber = createFiber(HostText, null)
+  fiber.pendingProps = text
+  return fiber
 }
 
 // 创建HostRootFiber的方法
 export function createHostRootFiber(): Fiber {
-  const fiber = createFiber(HostRoot, null);
-  return fiber;
+  const fiber = createFiber(HostRoot, null)
+  return fiber
 }
